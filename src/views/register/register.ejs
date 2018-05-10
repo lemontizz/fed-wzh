@@ -1,4 +1,9 @@
-<% include('../common/header.ejs') %>
+<%
+    viewBag.pageTitle = 'FED - 注册';
+    viewBag.cssFiles = ['register'];
+%>
+
+<%- include('../common/header.ejs') %>
     
     <form action="/login" method="post">
     	
@@ -15,5 +20,9 @@
 		</div>
 
     </form>
-  </body>
-</html>
+
+<%
+    viewBag.scriptsFiles = ['/scripts/pages/register/register.js'];
+%>
+
+<%- include('../common/footer.ejs') %>

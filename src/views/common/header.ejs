@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <title>FED - 注册</title>
+  	<title><%= viewBag.pageTitle %></title>
+  	<link rel="stylesheet" href="/styles/common.css">
+  	<link rel="stylesheet" href="/styles/frame.css">
+  	<% if(viewBag.cssFiles) { %>
+		<% viewBag.cssFiles.forEach(function(file) { %>
+			<link rel="stylesheet" href="<%= '/styles/' + file + '.css' %>">
+		<% }) %>
+  	<% } %>
   </head>
   <body>
+

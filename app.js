@@ -18,8 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
+app.use(function(req, res, next) {
+	res.locals.viewBag = {};
+	next();
+});
 app.use('/', indexRouter);
-app.use(db)
+app.use(db);
 
 // error handler
 app.use(function(err, req, res, next) {

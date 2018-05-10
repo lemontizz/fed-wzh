@@ -3,11 +3,11 @@ var router = express.Router();
 var content = require('./content');
 var users = require('./users');
 var login = require('./login');
-var allRouters = [...content, ...users, ...login]
+var register = require('./register');
+var allRouters = [...content, ...users, ...login, ...register];
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  	res.render('index', { title: 'Express' });
 });
 
 for(var i = 0; i < allRouters.length; i++) {
