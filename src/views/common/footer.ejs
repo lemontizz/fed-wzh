@@ -3,8 +3,8 @@
 	<script src="/scripts/common/requireConfig.js"></script>
 
 	<% if(viewBag.scriptsFiles) { %>
-		<% viewBag.scriptsFiles.forEach(function(script) { %>
-			<script src="<%= script %>"></script>
+		<% viewBag.scriptsFiles.forEach(function(scriptFile) { %>
+			<script src="<%= '/scripts/' + scriptFile + '.js' %>"></script>
 		<% }) %>
 	<% } %>
 	</body>

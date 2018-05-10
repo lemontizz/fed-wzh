@@ -1,6 +1,12 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	margin: 0;
+	line-height: 1;
+  	font-size: 100%;
+  	font-family: sans-serif, Akzidenz Grotesk BQ Light, Helvetica;
+  	-webkit-font-smoothing: antialiased;
+  	background: #f5f6f7;
+  	color: #424242;
+  	font-weight: 300;
 }
 
 .clearfix:after{
@@ -14,4 +20,48 @@ body {
 .clearfix{
 	zoom: 1;
 }
+
+.form-item {
+	padding-top: 30px;
+}
+.form-item .textbox {
+	width: 100%;
+}
+.form-item .textbox input {
+	height: 20px;
+	border-radius: 2px;
+	width: 100%;
+	box-shadow: 0px 0px 6px 0px #ddd inset;
+}
+.form-item .textbox input, .form-item .textbox textarea, .form-item .textbox select {
+	border: 1px solid #b3bbc1;
+	padding: 8px 0;
+	text-indent: 8px;
+	appearance: none;
+	-webkit-appearance: none;
+	outline: 0;
+	background: none;
+	position: relative;
+	z-index: 1;
+}
+.form-item .textbox input:focus, .form-item .textbox textarea:focus, .form-item .textbox select:focus {
+	border: 1px solid #7fc857;
+}
+.form-item .label {
+	display: block;
+	transform: translate(8px , -28px);
+	transition: transform 0.2s;
+	position: absolute;
+	z-index: 0;
+}
+.form-item .label.top {
+	transform: scale(0.8) translate(2px , -75px);
+}
+
+
+
+
+
+
+
 

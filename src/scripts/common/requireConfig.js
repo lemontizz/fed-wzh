@@ -2,6 +2,7 @@ requirejs.config({
 	baseUrl: '/scripts/lib/',
 	paths: {
 		text: 'text',
-		domReady: '/scripts/lib/domReady'
+		domReady: 'domReady',
+		jquery: 'jquery-3.3.1'
 	}
 });

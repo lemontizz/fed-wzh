@@ -4,25 +4,46 @@
 %>
 
 <%- include('../common/header.ejs') %>
-    
-    <form action="/login" method="post">
-    	
-    	<div>
-    		<label>username:</label>
-    		<input id="username" name="username" type="text">
-    	</div>
-		<div>
-			<label>password:</label>
-			<input id="password" name="password" type="text">
-		</div>
-		<div>
-			<input type="submit">
-		</div>
 
-    </form>
+    <div class="register-head">
+        <div class="text">Thank you for registering FED</div>
+    </div>
+
+    <div class="register-body" id="register-body">
+        <h2>Account Profile</h2>
+        <div class="form-item">
+            <div class="textbox">
+                <input type="email" id="email">
+            </div>
+            <label class="label">Email</label>
+        </div>
+        <div class="form-item">
+            <div class="textbox">
+                <input type="text" id="username">
+            </div>
+            <label class="label">Username</label>
+        </div>
+        <div class="form-item">
+            <div class="textbox">
+                <input type="text" id="password">
+            </div>
+            <label class="label">Password</label>
+            <div class="password-vali">
+                <ul class="clearfix">
+                    <li><span class="fa fa-check icon"></span><span class="text">最少6个字符</span></li>
+                    <li><span class="fa fa-check icon"></span><span class="text">1个数字</span></li>
+                    <li><span class="fa fa-check icon"></span><span class="text">1个字母</span></li>
+                    <li><span class="fa fa-check icon"></span><span class="text">1个特殊字符</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-btn">
+            <button>Submit</button>
+        </div>
+    </div>
 
 <%
-    viewBag.scriptsFiles = ['/scripts/pages/register/register.js'];
+    viewBag.scriptsFiles = ['common/inputLabel','pages/register/register'];
 %>
 
 <%- include('../common/footer.ejs') %>
