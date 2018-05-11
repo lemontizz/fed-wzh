@@ -1,6 +1,9 @@
 	
+	<%- include('loading.ejs') %>
+	<%- include('prompt.ejs') %>
+
 	<script src="/scripts/lib/require.js"></script>
-	<script src="/scripts/common/requireConfig.js"></script>
+	<script src="/scripts/config/requireConfig.js"></script>
 
 	<% if(viewBag.scriptsFiles) { %>
 		<% viewBag.scriptsFiles.forEach(function(scriptFile) { %>

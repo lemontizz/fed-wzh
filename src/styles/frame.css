@@ -1,0 +1,58 @@
+#page-loading {
+	background: rgba(255, 255, 255, 0.5);
+	position: fixed;
+	z-index: 9999999;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	display: none;
+}
+#page-loading div {
+	margin-top: 50%;
+    margin-left: 50%;
+    transform: translate(-20px, -20px);
+}
+#page-loading div .fa {
+	color: #7fc857;
+}
+
+#page-prompt-wrap {
+	display: none;
+	position: fixed;
+	background: rgba(255, 255, 255, 0.7);
+	z-index: 100;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+#page-prompt {
+	width: 450px;
+	position: fixed;
+	left: 50%;
+	margin-left: -225px;
+	margin-top: 200px;
+	background: #fff;
+	box-shadow: 0 1px 5px 0px #ddd;
+}
+#page-prompt .header {
+	padding: 10px;
+	line-height: 1.5;
+}
+#page-prompt .header .close {
+	float: right;
+	text-decoration: none;
+	color: #7fc857;
+}
+#page-prompt .body {
+	padding: 5px 10px;
+	line-height: 1.5;
+}
+#page-prompt .footer {
+	text-align: right;
+	padding: 10px;
+}
+#page-prompt .footer button {
+	margin-left: 10px;
+}

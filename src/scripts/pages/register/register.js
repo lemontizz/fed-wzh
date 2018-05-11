@@ -1,5 +1,5 @@
-require(['jquery', 'layer', 'domReady!'], function($, layer) {
-	var register = {
+require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, ajax, prompt) {
+	let register = {
 		init: function() {
 			this.bindEls();
 			this.bindEvent();
@@ -9,23 +9,29 @@ require(['jquery', 'layer', 'domReady!'], function($, layer) {
 			this.$registerWrap = $('#register-body');
 			this.$username = $('#username');
 			this.$password = $('#password');
+			this.$confirmPassword = $('#confirm-password');
 			this.$email = $('#email');
 			this.$submit = $('#submit');
 			this.$character = $('#character');
 			this.$number = $('#number');
 			this.$letter = $('#letter');
 			this.$specialCharacter = $('#special-character');
+			this.$passwordEqual = $('#passwordEqual');
 		},
 		bindEvent: function() {
-			var self = this;
+			let self = this;
 
 			this.$submit.click(function() {
 				self.submitInfo();
 			});
 
 			this.$password.keyup(function() {
-				self.setPasswordValCls($(this).val());
+				self.valiPasswordRule($(this).val());
 			});
+
+			this.$confirmPassword.keyup(function() {
+				self.valiConfrimPasswordRule($(this).val())
+			})
 		},
 		setRule: function() {
 			this.emailRule = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -35,8 +41,7 @@ require(['jquery', 'layer', 'domReady!'], function($, layer) {
 			this.passwordLetter = /[A-Za-z]+/;
 			this.passwordNumber = /[0-9]+/;
 		},
-		setPasswordValCls: function(val) {
-			console.log(val);
+		valiPasswordRule: function(val) {
 			let rules = [{
 				rule: this.passwordLengthRule,
 				$el: this.$character
@@ -51,36 +56,84 @@ require(['jquery', 'layer', 'domReady!'], function($, layer) {
 				$el: this.$number
 			}];
 
+			return this.toggleCls(rules, val)
+		},
+		valiConfrimPasswordRule: function(val) {
+			let rules = [{
+					rule: new RegExp(this.$password.val()),
+					$el: this.$passwordEqual
+				}];
+
+			return this.toggleCls(rules, val)
+		},
+		toggleCls: function(rules, val) {
+			let valiSuccessNum = 0;
+
 			rules.map(function(item) {
 				if(item.rule.test(val)) {
-					console.log('yeah')
-					if(!item.$el.hasClass('active')) item.$el.addClass('active');
+					valiSuccessNum++;
+					if(!item.$el.hasClass('active')) {
+						item.$el.addClass('active');
+					}
 				} else {
-					console.log('oops');
 					if(item.$el.hasClass('active')) item.$el.removeClass('active')
 				}
 			});
-		},
-		toggleCls: function() {
 
+			return rules.length === valiSuccessNum;
 		},
 		validate: function() {
-			var email = this.$email.val(),
+			let email = this.$email.val(),
 				username = this.$username.val(),
-				password = this.$password.val();
+				password = this.$password.val(),
+				confirmPassword = this.$confirmPassword.val();
 
-			console.log('validate')
 			if(!email.length || !this.emailRule.test(email)) {
-				console.log('sfewrewr')
 				layer.tips('Please enter the correct email', '#email');
-				return;
+				this.$email.focus();
+				return false;
 			}
 			if(!username.length) {
-				layer.tips('请输入', '吸附元素选择器，如#id');
+				layer.tips('Please enter the username', '#username');
+				this.$username.focus();
+				return false;
 			}
+			if(!password.length) {
+				layer.tips('Please enter the password', '#password');
+				this.$password.focus();
+				return false;
+			}
+			if(!this.valiPasswordRule(password)) {
+				layer.tips('Password must consist of 6 or more special characters, numbers, letters', '#password');
+				this.$password.focus();
+				return false;
+			}
+			if(!confirmPassword.length) {
+				layer.tips('Please enter the confirm password', '#confirm-password');
+				this.$confirmPassword.focus();
+				return false;
+			}
+			if(!this.valiConfrimPasswordRule(confirmPassword)) {
+				layer.tips('The password and confirmation password must be the same', '#confirm-password');
+				this.$confirmPassword.focus();
+				return false;
+			}
+			return true;
 		},
 		submitInfo: function() {
+			if(this.$submit.hasClass('disabled')) return;
 			if(!this.validate()) return;
+
+			this.$submit.addClass('disabled');
+
+			ajax({
+				url: '/register',
+				method: 'POST'
+			})
+			.done(function() {
+				console.log('werwrwer')
+			})
+
 		}
 	};
 

@@ -8,7 +8,6 @@
 .register-head .text {
 	font-weight: 300;
 	font-size: 42px;
-	/*opacity: 0;*/
 	padding-top: 100px;
 	animation:animate 1s;
 }
@@ -55,6 +54,9 @@
 .password-vali li.active .text {
 	text-decoration:line-through
 }
+.confirm-password {
+	margin-bottom: 10px;
+}
 
 .form-btn button {
 	margin-top: 10px;
@@ -67,5 +69,11 @@
     line-height: 2;
     font-size: 20px;
     outline: none;
-    cursor: default;
+    cursor: pointer;
+}
+.form-btn button .icon {
+	display: none;
+}
+.form-btn button.disabled .icon {
+	display: inline-block;
 }

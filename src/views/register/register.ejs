@@ -19,13 +19,13 @@
         </div>
         <div class="form-item">
             <div class="textbox">
-                <input type="text" id="username">
+                <input type="text" id="username" max="18">
             </div>
             <label class="label">Username</label>
         </div>
         <div class="form-item">
             <div class="textbox">
-                <input type="password" id="password">
+                <input type="password" id="password" max="18">
             </div>
             <label class="label">Password</label>
             <div class="password-vali">
@@ -37,8 +37,19 @@
                 </ul>
             </div>
         </div>
+        <div class="form-item confirm-password">
+            <div class="textbox">
+                <input type="password" id="confirm-password">
+            </div>
+            <label class="label">Confirm Password</label>
+            <div class="password-vali">
+                <ul class="clearfix">
+                    <li id="passwordEqual"><span class="fa fa-check icon"></span><span class="text">确认密码与密码一致</span></li>    
+                </ul>
+            </div>
+        </div>
         <div class="form-btn">
-            <button id="submit">Submit</button>
+            <button id="submit"><i class="fa fa-spinner fa-pulse fa-fw icon"></i>Submit</button>
         </div>
     </div>
 

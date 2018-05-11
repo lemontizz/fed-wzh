@@ -11,8 +11,11 @@ router.get('/', function(req, res, next) {
 });
 
 for(var i = 0; i < allRouters.length; i++) {
-	var currentRouter = allRouters[i];
-	router[currentRouter.method](currentRouter.api, currentRouter.callback);
+	(function(route) {
+		router[route.method](route.api, function(req, res, next) {
+			route.callback(req, res, next);
+		});
+	})(allRouters[i]);
 }
 
 module.exports = router;
