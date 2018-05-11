@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
 	var $ = require('jquery'),
-		loading = require('loading');
+		loading = require('loading'),
+		prompt = require('prompt');
 
 	module.exports = function({
 			url = '',
@@ -8,7 +9,8 @@ define(function(require, exports, module) {
 			contentType = 'application/json',
 			headers = {},
 			alertErrorInfo = true,
-			showLoading = true
+			showLoading = true,
+			data = {}
 		}) {
 
 		let finalHeaders = Object.assign({}, headers),
@@ -19,6 +21,7 @@ define(function(require, exports, module) {
 			method,
 			contentType,
 			headers: finalHeaders,
+			data: data,
 			beforeSend: function() {
 				console.log(loading);
 				if(showLoading) loading.show();
@@ -26,9 +29,11 @@ define(function(require, exports, module) {
 			complete: function() {
 				if(showLoading) loading.hide();
 			},
-			error: function() {
+			error: function(err) {
 				if(alertErrorInfo) {
-
+					prompt({
+						message: err.message || '请求出错'
+					})
 				}
 			}
 		})

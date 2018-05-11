@@ -121,6 +121,8 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 			return true;
 		},
 		submitInfo: function() {
+			let self = this;
+
 			if(this.$submit.hasClass('disabled')) return;
 			if(!this.validate()) return;
 
@@ -128,10 +130,18 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 
 			ajax({
 				url: '/register',
-				method: 'POST'
+				method: 'POST',
+				data: JSON.stringify({
+					username: this.$username.val(),
+					password: this.$password.val(),
+					email: this.$email.val()
+				})
 			})
 			.done(function() {
 				console.log('werwrwer')
+			})
+			.always(function() {
+				self.$submit.removeClass('disabled')
 			})
 
 		}
