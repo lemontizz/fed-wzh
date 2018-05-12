@@ -44,7 +44,7 @@ module.exports = [{
 				email: req.body.email
 			});
 
-			UserModel.create(function(err, doc) {
+			userDoc.save(function(err, doc) {
 				if(err) {
 					res.json({
 						statusCode: 500,
@@ -56,6 +56,15 @@ module.exports = [{
 						success: true,
 						data: doc
 					});
+				}
+			});
+
+			UserModel.find(function(err, docs) {
+				if(err) {
+					console.log('查询出错')
+				} else {
+					console.log('------');
+					console.log(docs);
 				}
 			})
 
