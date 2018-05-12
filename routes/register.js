@@ -31,14 +31,10 @@ module.exports = [{
 			doc: userDoc,
 			model: UserModel,
 			success: function(result) {
-				console.log('success-----');
 				res.json({
 					success: true,
 					data: result
 				});
-			},
-			error: function() {
-				console.log('error-----------')
 			}
 		});
 	}

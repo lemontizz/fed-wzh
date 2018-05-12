@@ -1,27 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+<%
+    viewBag.pageTitle = 'FED - 登录';
+    viewBag.cssFiles = ['register'];
+%>
 
-    <form action="/login" method="post">
-    	
-    	<div>
-    		<label for="">username:</label>
-    		<input id="username" name="username" type="text">
-    	</div>
-		<div>
-			<label for="">password:</label>
-			<input id="password" name="password" type="text">
-		</div>
-		<div>
-			<input type="submit">
-		</div>
+<%- include('../common/header.ejs') %>
 
-    </form>
-  </body>
-</html>
+    <div class="register-head">
+        <div class="text">Thank you for Loggin FED</div>
+    </div>
+
+    <div class="register-body" id="register-body">
+        <h2>Login FED</h2>
+        <div class="form-item">
+            <div class="textbox">
+                <input type="text" id="username" max="18">
+            </div>
+            <label class="label">Username / Email</label>
+        </div>
+        <div class="form-item">
+            <div class="textbox">
+                <input type="password" id="password" max="18">
+            </div>
+            <label class="label">Password</label>
+        </div>
+        <div class="form-btn">
+            <button id="submit"><i class="fa fa-spinner fa-pulse fa-fw icon"></i>Submit</button>
+        </div>
+    </div>
+
+<%
+    viewBag.scriptsFiles = ['common/inputLabel','pages/register/register'];
+%>
+
+<%- include('../common/footer.ejs') %>
