@@ -4,6 +4,8 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 			this.bindEls();
 			this.bindEvent();
 			this.setRule();
+
+			this.countdown = 3;
 		},
 		bindEls: function() {
 			this.$registerWrap = $('#register-body');
@@ -32,6 +34,10 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 			this.$confirmPassword.keyup(function() {
 				self.valiConfrimPasswordRule($(this).val())
 			})
+
+			this.$registerWrap.on('keyup', 'input', function(e) {
+				if(e.keyCode === 13) self.submitInfo();
+			});
 		},
 		setRule: function() {
 			this.emailRule = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
@@ -138,12 +144,27 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 				})
 			})
 			.done(function() {
-				console.log('werwrwer')
+				self.showPrompt(self.countdown, 0);
 			})
 			.always(function() {
 				self.$submit.removeClass('disabled')
 			})
+		},
+		showPrompt(countdown, time) {
+			let self = this;
 
+			if(countdown === 0) window.location.href = window.location.origin + '/login';
+
+			setTimeout(function() {
+				prompt({
+					message: '注册成功，<b>' + countdown + '</b>秒后跳转到登陆页面，点击确认也可直接跳转到登陆页面',
+					confirmAfter: function() {
+						window.location.href = window.location.origin + '/login'
+					}
+				});
+				self.countdown--;
+				self.showPrompt(self.countdown, 1000);
+			}, time);
 		}
 	};
 

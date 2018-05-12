@@ -6,7 +6,7 @@
 <%- include('../common/header.ejs') %>
 
     <div class="register-head">
-        <div class="text">Thank you for Loggin FED</div>
+        <div class="text">Thank you for logging in</div>
     </div>
 
     <div class="register-body" id="register-body">
@@ -26,10 +26,13 @@
         <div class="form-btn">
             <button id="submit"><i class="fa fa-spinner fa-pulse fa-fw icon"></i>Submit</button>
         </div>
+        <div class="info">
+            No account, <a href="/register" class="text-link">register</a> one
+        </div>
     </div>
 
 <%
-    viewBag.scriptsFiles = ['common/inputLabel','pages/register/register'];
+    viewBag.scriptsFiles = ['common/inputLabel','pages/login/login'];
 %>
 
 <%- include('../common/footer.ejs') %>

@@ -23,38 +23,55 @@ module.exports = function({
 	error = null
 }) {
 
-	if(!req || !res || !method || !doc || !model) {
-		console.log('参数不完整');
-		res.json({
-			success: false,
-			errorMessage: '数据库错误'
-		});
-		return;
-	} 
+	return new Promise((resolve, reject) => {
 
-	// 连接数据库
-	mongoose.connect(dbUrl, function(err) {
-		if(err) {
-			res.json({
+		if(!req || !res || !method || !doc || !model) {
+			console.log('参数不完整');
+			res.status(500).json({
 				success: false,
-				errorMessage: '连接数据库出错'
+				message: '数据库错误',
+				data: null
 			});
+			reject(err);
 			return;
-		} 
-		
-		//操作数据
-		model[method](doc, function(operationErr, result) {
+		}
+
+		// 连接数据库
+		mongoose.connect(dbUrl, function(err) {
 			if(err) {
-				if(error && typeof error === 'function') error(operationErr);
-
-				res.json({
+				res.status(500).json({
 					success: false,
-					errorMessage: '数据库操作失败'
+					message: '连接数据库出错',
+					data: null
 				});
+				reject(err);
 				return;
-			}
+			} 
+			
+			//操作数据
+			model[method](doc, function(operationErr, result) {
+				if(err) {
+					if(error && typeof error === 'function') error(operationErr);
 
-			if(success && typeof success === 'function') success(result);
+					res.status(500).json({
+						success: false,
+						message: '数据库操作失败',
+						data: null
+					});
+					reject(err);
+					return;
+				}
+
+				if(success && typeof success === 'function') {
+					success(result);
+				}
+
+				resolve({
+					success: true,
+					message: '',
+					data: result
+				});
+			})
 		})
-	})
+	});
 }

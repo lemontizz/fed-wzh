@@ -21,7 +21,7 @@ define(function(require, exports, module) {
 	let prompt = {
 		show: function(params) {
 			$wrap.find('[data-field=title]').text(params.title);
-			$wrap.find('[data-field=content]').text(params.message);
+			$wrap.find('[data-field=content]').html(params.message);
 
 			callbacks = params.callbacks;
 			$wrap.show();

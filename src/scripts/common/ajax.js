@@ -32,7 +32,7 @@ define(function(require, exports, module) {
 			error: function(err) {
 				if(alertErrorInfo) {
 					prompt({
-						message: err.message || '请求出错'
+						message: err.responseJSON.message || '请求出错'
 					})
 				}
 			}
