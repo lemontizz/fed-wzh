@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 *param {req} Object - route返回的req参数
 *param {res} Object - route返回的res参数
 *param {model} Object - 由mongoose生成
-*param {doc} Object - 需要操作的数据
+*param {options} Object - Model.findById(id, [projection], [options], [callback]) 和mongoose提供的参数一致，按顺序传入，不按名称
 *param {method} Object - 需要操作的方法，与mongoose提供的数据操作方法一致
 *param {success} Function - 数据操作成功的回调函数
 *param {error} Function - 数据操作失败的回调函数
@@ -16,7 +16,7 @@ module.exports = function({
 	req = null,
 	res = null,
 	model = null,
-	doc = null,
+	options = null,
 	method = '',
 	success = null,
 	error = null,
@@ -28,7 +28,7 @@ module.exports = function({
 
 		if(!req || !res || !method || !model) {
 			console.log('参数不完整');
-			console.log(method, doc, model)
+			console.log(method, options, model)
 			res.status(500).json({
 				success: false,
 				message: '数据库错误',
@@ -64,41 +64,49 @@ module.exports = function({
 			}
 			
 			//操作数据
-			model[method](doc, function(operationErr, result) {
-				if(err) {
-					console.log('operation failed');
-					if(error && typeof error === 'function') error(operationErr);
+			let handle;
+			if(Array.isArray(options)) {
+				handle = model[method](options[0], options[1], options[2], options[3]);
+			} else {
+				handle = model[method](options);
+			}
+			
+			handle.exec(function(operationErr, result) {
+					if(err) {
+						console.log('operation failed');
+						if(error && typeof error === 'function') error(operationErr);
 
-					res.status(500).json({
-						success: false,
-						message: '数据库操作失败',
-						data: null
+						res.status(500).json({
+							success: false,
+							message: '数据库操作失败',
+							data: null
+						});
+						reject(err);
+						return;
+					}
+					console.log('operation success');
+
+					if(success && typeof success === 'function') {
+						success(result);
+					}
+
+					if(typeof result === 'undefined') {
+						console.log('hreererererer')
+						res.status(500).json({
+							success: false,
+							message: '操作出错，result为undefined',
+							data: null
+						});
+						reject(result);
+						return;
+					}
+
+					resolve({
+						success: true,
+						message: '',
+						data: result
 					});
-					reject(err);
-					return;
-				}
-				console.log('operation success');
-
-				if(success && typeof success === 'function') {
-					success(result);
-				}
-
-				if(typeof result === 'undefined') {
-					res.status(500).json({
-						success: false,
-						message: '操作出错，result为undefined',
-						data: null
-					})
-					reject(result);
-					return;
-				}
-
-				resolve({
-					success: true,
-					message: '',
-					data: result
-				});
-			})
+				})
 		})
 	});
 }

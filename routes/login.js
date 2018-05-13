@@ -22,20 +22,25 @@ let login = {
 		let users = await connectionDB({
 			req, res,
 			method: 'find',
-			doc: {$or: [{username: query.username}, {email: query.username}]},
+			options: [{$or: [{username: query.username}, {email: query.username}]}, {_id: 0}],
 			model: mod.Model
 		});
 
-		if(users.success && !users.data) {
+		console.log('---')
+		console.log(users);
+
+
+
+		if(!users.data.length) {
 			res.status(401).json({
 				success: false,
 				message: '用户不存在',
 				data: null
-			})
-		} 
+			});
+			return;
+		}
 
 		let user;
-
 		users.data.map(function(item) {
 			if(item.password === query.password) user = item;
 		});

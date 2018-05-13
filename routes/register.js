@@ -36,7 +36,7 @@ var register = {
 		let usernameRepeat = await connectionDB({
 			req, res, 
 			method: 'find',
-			doc: {username: req.body.username},
+			options: [{username: req.body.username}],
 			model: mod.Model
 		});
 		if(usernameRepeat.success && usernameRepeat.data.length) {
@@ -50,7 +50,7 @@ var register = {
 		let emailRepeat = await connectionDB({
 			req, res,
 			method: 'find',
-			doc: {email: req.body.email},
+			options: [{email: req.body.email}],
 			model: mod.Model
 		});
 		if(emailRepeat.success && emailRepeat.data.length) {
@@ -65,7 +65,7 @@ var register = {
 			req,
 			res,
 			method: 'create',
-			doc: userDoc,
+			options: [userDoc],
 			model: mod.Model
 		});
 		res.json({
