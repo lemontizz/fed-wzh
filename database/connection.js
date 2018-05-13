@@ -3,7 +3,6 @@ const dbUrl = 'mongodb://' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfi
 const mongoose = require('mongoose');
 
 /*
-*
 *param {req} Object - route返回的req参数
 *param {res} Object - route返回的res参数
 *param {model} Object - 由mongoose生成
@@ -20,37 +19,54 @@ module.exports = function({
 	doc = null,
 	method = '',
 	success = null,
-	error = null
+	error = null,
+	connectionSuccess = null,
+	connectionError = null
 }) {
 
 	return new Promise((resolve, reject) => {
 
-		if(!req || !res || !method || !doc || !model) {
+		if(!req || !res || !method || !model) {
 			console.log('参数不完整');
+			console.log(method, doc, model)
 			res.status(500).json({
 				success: false,
 				message: '数据库错误',
 				data: null
 			});
-			reject(err);
+			reject();
 			return;
 		}
 
 		// 连接数据库
 		mongoose.connect(dbUrl, function(err) {
 			if(err) {
-				res.status(500).json({
-					success: false,
-					message: '连接数据库出错',
-					data: null
-				});
+				console.log('connection failed')
+				if(connectionError && typeof connectionError === 'function') {
+					connectionError(err);
+				} else {
+					res.status(500).json({
+						success: false,
+						message: '连接数据库出错',
+						data: null
+					});
+				}
 				reject(err);
 				return;
 			} 
+
+			console.log('connection success')
+
+			if(connectionSuccess && typeof connectionSuccess === 'function') {
+				connectionSuccess();
+				resolve();
+				return;
+			}
 			
 			//操作数据
 			model[method](doc, function(operationErr, result) {
 				if(err) {
+					console.log('operation failed');
 					if(error && typeof error === 'function') error(operationErr);
 
 					res.status(500).json({
@@ -61,9 +77,20 @@ module.exports = function({
 					reject(err);
 					return;
 				}
+				console.log('operation success');
 
 				if(success && typeof success === 'function') {
 					success(result);
+				}
+
+				if(typeof result === 'undefined') {
+					res.status(500).json({
+						success: false,
+						message: '操作出错，result为undefined',
+						data: null
+					})
+					reject(result);
+					return;
 				}
 
 				resolve({

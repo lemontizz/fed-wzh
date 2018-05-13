@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var connectionDB = require('../database/connection');
-var Schema = mongoose.Schema;
+var mod = require('../model/user');
+// var Schema = mongoose.Schema;
 
 module.exports = [{
 	method: 'get',
@@ -12,35 +13,31 @@ module.exports = [{
 	method: 'post',
 	api: '/register',
 	callback: function(req, res, next) {
-
-		console.log('nnnnnnnnnnnn')
-		console.log(register);
-		console.log('kkkkkkkkkkkk')
-
 		register.registerUser(req, res, next);
 	}
 }];
 
-var userSchema = new Schema({
-	email: String,
-	username: String,
-	password: String
-}, { timestamps: true });
-var UserModel = mongoose.model('users', userSchema);
+// var userSchema = new Schema({
+// 	email: String,
+// 	username: String,
+// 	password: String
+// }, { timestamps: true });
+// var mod.Model = mongoose.model('users', userSchema);
 
 var register = {
 	registerUser: async function(req, res, next) {
-		var userDoc = new UserModel({
+		var userDoc = new mod.Model({
 			username: req.body.username,
-			password: req.body.password,
-			email: req.body.email
+			password: unescape(req.body.password),
+			email: req.body.email,
+			role: 'user'
 		});
 
 		let usernameRepeat = await connectionDB({
 			req, res, 
 			method: 'find',
 			doc: {username: req.body.username},
-			model: UserModel
+			model: mod.Model
 		});
 		if(usernameRepeat.success && usernameRepeat.data.length) {
 			res.status(500).json({
@@ -54,7 +51,7 @@ var register = {
 			req, res,
 			method: 'find',
 			doc: {email: req.body.email},
-			model: UserModel
+			model: mod.Model
 		});
 		if(emailRepeat.success && emailRepeat.data.length) {
 			res.status(500).json({
@@ -69,9 +66,15 @@ var register = {
 			res,
 			method: 'create',
 			doc: userDoc,
-			model: UserModel
+			model: mod.Model
 		});
-		res.json(userResult);
+		res.json({
+			success: true,
+			message: '',
+			data: {
+				username: userResult.username
+			}
+		});
 	},
 	
 }

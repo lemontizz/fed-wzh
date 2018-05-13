@@ -18,14 +18,5 @@ module.exports = {
 			console.log(err);
 			console.log(docs);
 		})
-
-		// mongodb.open(function(err, db) {
-		// 	if(err) {
-		// 		console.log('error');
-		// 		console.log(err);
-		// 	} else {
-		// 		console.log('mongodb open success');
-		// 	}
-		// })
 	}
 }

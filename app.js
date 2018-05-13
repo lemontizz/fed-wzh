@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// var db = require('./database/connect');
+var db = require('./database/connect');
 
 var indexRouter = require('./routes/index');
 
@@ -23,7 +23,7 @@ app.use(function(req, res, next) {
 	next();
 });
 app.use('/', indexRouter);
-// app.use(db);
+app.use(db);
 
 // error handler
 app.use(function(err, req, res, next) {

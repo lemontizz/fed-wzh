@@ -139,7 +139,7 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 				method: 'POST',
 				data: JSON.stringify({
 					username: this.$username.val(),
-					password: this.$password.val(),
+					password: escape(this.$password.val()),
 					email: this.$email.val()
 				})
 			})
