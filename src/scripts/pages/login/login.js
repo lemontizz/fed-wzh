@@ -52,7 +52,7 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function ($, layer, 
 				})
 			})
 			.done(function() {
-				window.location.href = '/content';
+				window.location.href = '/home';
 			})
 			.always(function() {
 				self.$submit.removeClass('disabled');

@@ -55,9 +55,6 @@ module.exports = function({
 
 		// 连接数据库
 		mongoose.connect(dbUrl, function(err) {
-			
-			
-
 			if(err) {
 				console.log('connection failed')
 				if(connectionError && typeof connectionError === 'function') {
@@ -119,7 +116,7 @@ module.exports = function({
 								if(result.length) {
 									logModel.create({
 										detail: req.body.username + logInfo[req.url][req.method.toLowerCase()],
-										userId: result[0]._id.toString(),
+										userId: result[0]._id,
 										username: req.body.username
 									});
 								}

@@ -56,3 +56,37 @@
 #page-prompt .footer button {
 	margin-left: 10px;
 }
+
+#page-nav {
+	background: #fff;
+	padding: 15px;
+	width: 1000px;
+	margin: 0 auto;
+	position: fixed;
+	top: 0;
+	left: 50%;
+	margin-left: -500px;
+	z-index: 1;
+}
+#page-nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 14px;
+}
+#page-nav ul li {
+	float: left;
+	list-style: none;
+}
+#page-nav ul:first-child {
+	float: left;
+}
+#page-nav ul:first-child li {
+	margin-right: 10px;
+}
+#page-nav ul a {
+	color: #424242;
+}
+#page-nav ul:last-child {
+	float: right;
+}

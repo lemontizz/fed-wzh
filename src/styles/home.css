@@ -1,0 +1,42 @@
+body {
+	overflow-x: hidden;
+}
+.home-wrap {
+	position: relative;
+}
+.home-focus {
+	height: 900px;
+	background: #000;
+}
+.home-focus div:first-child {
+	height: 960px;
+	background-image: url('../images/home_bg_3.jpeg');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.home-focus div:last-child {
+	height: 960px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    box-shadow: 0 0 191px 1000px inset rgba(255, 255, 255, 0.3);
+}
+.slope {
+	margin-top: -100px;
+	width: 110%;
+	position: relative;
+	background: -webkit-linear-gradient(left, rgba(115,165,77, 1), rgba(160,198,164, 1) , rgba(199,222,252, 1));
+	transform: rotate(-7deg);
+	transfrom-origin: left;
+	height: 10px;
+	margin-left: -15px;
+}
+.slope:after {
+	content: '';
+    height: 230px;
+    background: #f5f6f7;
+    display: block;
+    position: absolute;
+    top: 10px;
+    width: 150%;
+}

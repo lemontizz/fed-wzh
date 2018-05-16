@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var content = require('./content');
 var users = require('./users');
 var login = require('./login');
 var register = require('./register');
-var allRouters = [...content, ...users, ...login, ...register];
+var home = require('./home');
+var allRouters = [...users, ...login, ...register, ...home];
 
 router.get('/', function(req, res, next) {
   	res.render('index', { title: 'Express' });
