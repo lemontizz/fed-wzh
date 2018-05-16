@@ -1,5 +1,5 @@
 var mod = require('../model/user');
-var connectionDB = require('../database/connection');
+var operationDB = require('../database/operation-db');
 
 module.exports = [{
 	method: 'get',
@@ -17,19 +17,14 @@ module.exports = [{
 
 let login = {
 	login: async function(req, res, next) {
-		let query = {username: req.body.username, password: unescape(req.body.password)};
+		let query = {username: req.body.username, password: req.body.password};
 
-		let users = await connectionDB({
+		let users = await operationDB({
 			req, res,
 			method: 'find',
-			options: [{$or: [{username: query.username}, {email: query.username}]}, {_id: 0}],
+			options: [{$or: [{username: query.username}, {email: query.username}]}],
 			model: mod.Model
 		});
-
-		console.log('---')
-		console.log(users);
-
-
 
 		if(!users.data.length) {
 			res.status(401).json({
@@ -46,11 +41,15 @@ let login = {
 		});
 
 		if(user) {
+			console.log('~~~~~~~~~')
+			console.log(req.session);
+			req.session.user = user;
+
 			res.json({
 				success: true,
 				message: '',
 				data: user
-			})
+			});
 		} else {
 			res.status(401).json({
 				success: false,

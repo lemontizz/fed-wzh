@@ -18,12 +18,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src')));
+app.use(db);
 app.use(function(req, res, next) {
 	res.locals.viewBag = {};
+	if(req.session) {
+		res.locals.viewBag.USER = req.session.user ? req.session.user : {};
+	} else {
+		res.locals.viewBag.USER = {};
+	}
 	next();
 });
+app.use(function(req, res, next) {
+	var url = req.originalUrl,
+		notAuthPage = ['/login', '/register'];
+	if(!(notAuthPage.find((i) => i == url))) {
+		if(!req.session || !req.session.user) {
+			return res.redirect("/login");	
+		}
+	}
+	next();
+});
+
 app.use('/', indexRouter);
-app.use(db);
+
 
 // error handler
 app.use(function(err, req, res, next) {

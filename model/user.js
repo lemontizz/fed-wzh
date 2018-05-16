@@ -6,7 +6,8 @@ var userSchema = new Schema({
 	id: ObjectId,
 	username: {type: String},
 	password: {type: String},
-	email: {type: String}
+	email: {type: String},
+	role: {type: String}
 }, { timestamps: true });
 
 var userModel = mongoose.model('users', userSchema);

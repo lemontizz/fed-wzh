@@ -1,6 +1,19 @@
 const dbConfig = require('./config');
 const dbUrl = 'mongodb://' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.db;
 const mongoose = require('mongoose');
+const logInfo = require('./log-info');
+
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
+
+var logSchema = new Schema({
+	// id: Schema.Types.ObjectId,
+	userId: String,
+	detail: String,
+}, { timestamps: true });
+
+var logModel = mongoose.model('log', logSchema);
+var noUser = ['/register'];
 
 /*
 *param {req} Object - route返回的req参数
@@ -21,7 +34,9 @@ module.exports = function({
 	success = null,
 	error = null,
 	connectionSuccess = null,
-	connectionError = null
+	connectionError = null,
+	addLog = true,
+	log = null
 }) {
 
 	return new Promise((resolve, reject) => {
@@ -40,6 +55,9 @@ module.exports = function({
 
 		// 连接数据库
 		mongoose.connect(dbUrl, function(err) {
+			
+			
+
 			if(err) {
 				console.log('connection failed')
 				if(connectionError && typeof connectionError === 'function') {
@@ -62,16 +80,8 @@ module.exports = function({
 				resolve();
 				return;
 			}
-			
-			//操作数据
-			let handle;
-			if(Array.isArray(options)) {
-				handle = model[method](options[0], options[1], options[2], options[3]);
-			} else {
-				handle = model[method](options);
-			}
-			
-			handle.exec(function(operationErr, result) {
+
+			model[method](...options, function(operationErr, result) {
 					if(err) {
 						console.log('operation failed');
 						if(error && typeof error === 'function') error(operationErr);
@@ -91,7 +101,6 @@ module.exports = function({
 					}
 
 					if(typeof result === 'undefined') {
-						console.log('hreererererer')
 						res.status(500).json({
 							success: false,
 							message: '操作出错，result为undefined',
@@ -99,6 +108,38 @@ module.exports = function({
 						});
 						reject(result);
 						return;
+					}
+
+					//写入日志
+					try {
+						if(addLog) {
+							if(req.url === '/login') {
+								console.log(result[0]);
+								console.log(result[0]._id);
+								if(result.length) {
+									logModel.create({
+										detail: req.body.username + logInfo[req.url][req.method.toLowerCase()],
+										userId: result[0]._id.toString(),
+										username: req.body.username
+									});
+								}
+							} else if(req.url === '/register') {
+								console.log(result);
+								logModel.create({
+									detail: req.body.username + logInfo[req.url][req.method.toLowerCase()],
+									userId: result._id.toString(),
+									username: req.body.username
+								});
+							} else {
+								logModel.create({
+									detail: logInfo[req.url][req.method.toLowerCase()],
+									userId: req.session.id,
+									username: req.session.username
+								});
+							}
+						}
+					} catch(e) {
+						console.log('写入log出错', req.url, req.method);
 					}
 
 					resolve({
