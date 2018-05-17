@@ -4,10 +4,19 @@
 		<span class="triangle"></span>
 	</div>
 	<ul class="nav-left">
-		<li><a href="/login" class="text-link">登录</a></li>
-		<li><a href="/login" class="text-link">没有账号？注册一个</a></li>
+		<% if (viewBag.user) { %>
+			<li>欢迎你，<%= viewBag.user.username %></li>
+		<% } else { %>
+			<li><a href="/login" class="text-link">登录</a></li>
+			<li><a href="/login" class="text-link">没有账号？注册一个</a></li>
+		<% } %>
 	</ul>
 	<ul class="nav-right">
-		<li><a href="/logout" class="text-link">退出</a></li>
+		<% if (viewBag.user) { %>
+			<li><a href="/manage" class="text-link">我的管理</a></li>
+			<li><a href="/manage" class="text-link">上传项目</a></li>
+		<% } else { %>
+			<li><a href="/logout" class="text-link">退出</a></li>
+		<% } %>
 	</ul>
 </nav>

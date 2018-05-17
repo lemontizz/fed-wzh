@@ -22,9 +22,9 @@ app.use(db);
 app.use(function(req, res, next) {
 	res.locals.viewBag = {};
 	if(req.session) {
-		res.locals.viewBag.USER = req.session.user ? req.session.user : {};
+		res.locals.viewBag.user = req.session.user ? req.session.user : {};
 	} else {
-		res.locals.viewBag.USER = {};
+		res.locals.viewBag.user = null;
 	}
 	next();
 });

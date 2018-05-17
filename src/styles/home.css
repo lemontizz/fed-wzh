@@ -44,8 +44,8 @@ body {
 .car-wrap {
 	position: absolute;
 	width: 100px;
-	height: 48px;
-	top: -44px;
+	height: 35px;
+	top: -33px;
 	font-size: 0;
 	left: 0;
 	animation-name: movecar;

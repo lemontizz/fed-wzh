@@ -91,6 +91,9 @@
 #page-nav ul:last-of-type {
 	float: right;
 }
+#page-nav ul:last-of-type li {
+	margin-left: 10px;
+}
 #page-nav .logo {
 	position: absolute;
 	left: 10px;
