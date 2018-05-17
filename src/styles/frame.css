@@ -78,15 +78,21 @@
 	float: left;
 	list-style: none;
 }
-#page-nav ul:first-child {
+#page-nav ul:first-of-type {
 	float: left;
+	margin-left: 30px;
 }
-#page-nav ul:first-child li {
+#page-nav ul:first-of-type li {
 	margin-right: 10px;
 }
 #page-nav ul a {
 	color: #424242;
 }
-#page-nav ul:last-child {
+#page-nav ul:last-of-type {
 	float: right;
+}
+#page-nav .logo {
+	position: absolute;
+	left: 10px;
+	top: 3px;
 }
