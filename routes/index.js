@@ -4,7 +4,8 @@ var users = require('./users');
 var login = require('./login');
 var register = require('./register');
 var home = require('./home');
-var allRouters = [...users, ...login, ...register, ...home];
+var account = require('./manage/account');
+var allRouters = [...users, ...login, ...register, ...home, ...account];
 
 router.get('/', function(req, res, next) {
   	res.render('index', { title: 'Express' });

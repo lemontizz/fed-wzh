@@ -1,0 +1,14 @@
+<%
+    viewBag.pageTitle = 'FED - 首页';
+    viewBag.cssFiles = ['account'];
+%>
+
+<%- include('../../common/header.ejs') %>
+
+<%- include('../../common/manage-menu.ejs') %>
+
+<%
+    viewBag.scriptsFiles = ['pages/manage/account/account'];
+%>
+
+<%- include('../../common/footer.ejs') %>
