@@ -8,8 +8,14 @@ var account = require('./manage/account');
 var allRouters = [...users, ...login, ...register, ...home, ...account];
 
 router.get('/', function(req, res, next) {
-  	res.render('index', { title: 'Express' });
+  	res.render('home/home');
 });
+
+router.get('/logout', function(req, res, next) {
+	req.session.user = null;
+	res.locals.viewBag.user = null;
+	res.render('home/home');
+})
 
 for(var i = 0; i < allRouters.length; i++) {
 	(function(route) {

@@ -22,7 +22,7 @@ app.use(db);
 app.use(function(req, res, next) {
 	res.locals.viewBag = {};
 	if(req.session) {
-		res.locals.viewBag.user = req.session.user ? req.session.user : {};
+		res.locals.viewBag.user = req.session.user ? req.session.user : null;
 	} else {
 		res.locals.viewBag.user = null;
 	}
@@ -30,7 +30,7 @@ app.use(function(req, res, next) {
 });
 app.use(function(req, res, next) {
 	var url = req.originalUrl,
-		notAuthPage = ['/login', '/register'];
+		notAuthPage = ['/login', '/register', '/', '/home'];
 	if(!(notAuthPage.find((i) => i == url))) {
 		if(!req.session || !req.session.user) {
 			return res.redirect("/login");	

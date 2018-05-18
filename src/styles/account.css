@@ -1,3 +1,54 @@
 body {
 	background: #fff;
 }
+
+.page-manage-content {
+	margin-top: 80px;
+}
+
+.page-manage-content {
+	width: 50%;
+}
+.page-manage-content .title {
+	border-bottom: 1px solid #e4e4e4;
+	padding-bottom: 10px;
+	padding-top: 20px;
+}
+.page-manage-content .title .info {
+	float: left;
+}
+.page-manage-content .title .info h4 {
+	margin: 0;
+	padding: 0;
+}
+.page-manage-content .title .info p {
+	margin: 0;
+	padding: 0;
+	line-height: 1.5;
+	font-size: 12px;
+	min-height: 15px;
+}
+.page-manage-content .title .operation {
+	float: right;
+	text-align: right;
+}
+.page-manage-content .textbox input {
+	box-shadow: none;
+	border-color: #e4e4e4;
+}
+.page-manage-content .textbox {
+	width: 85%;
+	float: left;
+}
+.page-manage-content .content {
+	display: none;
+}
+.page-manage-content .content .operation {
+	float: right;
+	width: 15%;
+	text-align: right;
+	line-height: 2;
+}
+.page-manage-content .content .operation .fa {
+	margin-right: 3px;
+}

@@ -41,14 +41,22 @@ let login = {
 		});
 
 		if(user) {
-			console.log('~~~~~~~~~')
-			console.log(req.session);
-			req.session.user = user;
+			req.session.user = {
+					username: user.username,
+					email: user.email,
+					_id: user._id,
+					role: user.role
+				};
 
 			res.json({
 				success: true,
 				message: '',
-				data: user
+				data: {
+					username: user.username,
+					email: user.email,
+					_id: user._id,
+					role: user.role
+				}
 			});
 		} else {
 			res.status(401).json({

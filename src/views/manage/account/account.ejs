@@ -1,11 +1,78 @@
 <%
     viewBag.pageTitle = 'FED - 首页';
     viewBag.cssFiles = ['account'];
+    viewBag.menu = 'account';
 %>
 
 <%- include('../../common/header.ejs') %>
 
 <%- include('../../common/manage-menu.ejs') %>
+
+	<div class="page-manage-content">
+		<div class="item">
+			<div class="title clearfix">
+				<div class="info">
+					<h4>User Name</h4>
+					<p><%= viewBag.user.username %></p>
+				</div>
+				<div class="operation">
+					<span class="fa fa-edit"></span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="form-item clearfix">
+					<div class="textbox">
+						<input type="text" value="<%= viewBag.user.username %>">	
+					</div>
+					<div class="operation">
+						<a href="javascript:;" class="text-link"><span class="fa fa-save"></span>Save</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="title clearfix">
+				<div class="info">
+					<h4>Email</h4>
+					<p><%= viewBag.user.email %></p>
+				</div>
+				<div class="operation">
+					<span class="fa fa-edit"></span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="form-item clearfix">
+					<div class="textbox">
+						<input type="text" value="<%= viewBag.user.email %>">	
+					</div>
+					<div class="operation">
+						<a href="javascript:;" class="text-link"><span class="fa fa-save"></span>Save</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="title clearfix">
+				<div class="info">
+					<h4>Password</h4>
+					<p><%= viewBag.user.password %></p>
+				</div>
+				<div class="operation">
+					<span class="fa fa-edit"></span>
+				</div>
+			</div>
+			<div class="content">
+				<div class="form-item clearfix">
+					<div class="textbox">
+						<input type="text" value="<%= viewBag.user.password %>">	
+					</div>
+					<div class="operation">
+						<a href="javascript:;" class="text-link"><span class="fa fa-save"></span>Save</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <%
     viewBag.scriptsFiles = ['pages/manage/account/account'];

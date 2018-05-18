@@ -74,7 +74,7 @@ body {
 	height: 40%;
 }
 
-.btn-default {
+.btn-default, .btn-primary {
 	display: inline-block;
 	outline: none;
 	background: #fff;
@@ -86,10 +86,30 @@ body {
 	border-radius: 4px;
 	color: #7fc857;
 	cursor: pointer;
+	text-decoration: none;
+	transition: 2s;
 }
-.btn-default.btn-primary {
+.btn-primary {
 	background: #7fc857;
 	color: #fff;
+}
+.btn-default .icon {
+	color: #7fc857;
+	transition: 2s;
+}
+.btn-primary .icon {
+	color: #fff;
+}
+.btn-default:hover {
+	color: #62ad39;
+	border-color: #62ad39;
+}
+.btn-default:hover .icon {
+	color: #62ad39;
+}
+.btn-primary:hover {
+	background: #62ad39;
+	border-color: #62ad39;
 }
 
 .logo {
