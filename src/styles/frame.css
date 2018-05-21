@@ -137,11 +137,18 @@
 	padding: 15px;
 	width: 1000px;
 	margin: 0 auto;
-	position: fixed;
-	top: 0;
-	left: 50%;
-	margin-left: -500px;
-	z-index: 1;
+	position: relative;
+}
+#page-nav.manage {
+	width: auto;
+}
+@media screen and (max-width: 1000px) {
+    #page-nav {
+        width: auto;
+        left: 0;
+        margin-left: 0;
+        position: inherit;
+    }
 }
 #page-nav ul {
 	margin: 0;

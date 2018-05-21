@@ -17,7 +17,7 @@ body {
     width: 100%;
     position: absolute;
     top: 0;
-    box-shadow: 0 0 191px 1000px inset rgba(255, 255, 255, 0.3);
+    /*box-shadow: 0 0 191px 1000px inset rgba(255, 255, 255, 0.3);*/
 }
 .slope-wrap {
 	position: relative;

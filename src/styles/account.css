@@ -13,6 +13,7 @@ body {
 	border-bottom: 1px solid #e4e4e4;
 	padding-bottom: 10px;
 	padding-top: 20px;
+	transition: 1s border;
 }
 .page-manage-content .title .info {
 	float: left;
@@ -32,23 +33,121 @@ body {
 	float: right;
 	text-align: right;
 }
+.page-manage-content .title .operation input {
+	width: 0px;
+    border-top: none;
+    line-height: 1.5;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #7fc857;
+    outline: none;
+    padding: 2px 0;
+    text-indent: 2px;
+    opacity: 0;
+    vertical-align: top;
+    transition: 400ms width, 400ms opacity;
+}
+.page-manage-content .title .operation .fa {
+	position: relative;
+	color: #424242;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+	transition: 200ms display;
+}
+.page-manage-content .title .operation .fa:before {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 16px;
+	width: 16px;
+	z-index: 3;
+	overflow: hidden;
+	transition: 300ms height;
+	vertical-align: top;
+}
+.page-manage-content .title .operation .fa:after {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 0px;
+	width: 16px;
+	color: #7fc857;
+	z-index: 2;
+	vertical-align: top;
+}
+.page-manage-content .title .operation .fa-save {
+	display: none;
+}
+.page-manage-content .title .operation .fa-edit {
+	display: inline-block;
+}
+.page-manage-content .title .operation .fa-save:after {
+	content: "\f0c7";
+}
+.page-manage-content .title .operation .fa-edit:after {
+	content: "\f044";
+}
+.page-manage-content .title .operation .fa:hover:before {
+	height: 0px;
+}
+.page-manage-content .title .operation.active input {
+	opacity: 1;
+	width: 200px;
+}
+.page-manage-content .title .operation.active .fa-save {
+	display: inline-block;
+}
+.page-manage-content .title .operation.active .fa-edit {
+	display: none;
+}
+
 .page-manage-content .textbox input {
 	box-shadow: none;
 	border-color: #e4e4e4;
 }
-.page-manage-content .textbox {
-	width: 85%;
-	float: left;
-}
 .page-manage-content .content {
-	display: none;
+	/*height: 0;*/
+	overflow: hidden;
+	width: 100%;
+	margin-left: 100%;
+	transition: 500ms margin, 500ms opacity;
+	opacity: 0;
 }
-.page-manage-content .content .operation {
-	float: right;
-	width: 15%;
-	text-align: right;
-	line-height: 2;
+.page-manage-content .account-item {
+	overflow: hidden;
 }
 .page-manage-content .content .operation .fa {
 	margin-right: 3px;
+}
+.page-manage-content .account-item.active .title {
+	border-bottom: 1px solid #f5f3f3;
+}
+.page-manage-content .account-item.active .content {
+	/*height: auto;*/
+	opacity: 1;
+	margin-left: 0;
+}
+.page-manage-content .account-item.password .textbox input {
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-radius: 0;
+}
+.page-manage-content .password .content .textbox {
+	margin-top: 10px;
+}
+.page-manage-content .password .content .textbox input {
+	outline: none;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #f5f5f5;
+	padding: 8px 0;
+	text-indent: 8px;
+	width: 80%;
+	display: inline-block;
+}
+.page-manage-content .password .content .operation {
+	margin-top: 10px;
 }

@@ -1,0 +1,16 @@
+<nav id="page-nav" class="manage clearfix">
+	<div class="logo">
+		<span class="windmill fa-spin"></span>
+		<span class="triangle"></span>
+	</div>
+	<ul class="nav-left">
+		<% if (viewBag.user) { %>
+			<li>Welcome, <%= viewBag.user.username %></li>
+		<% } %>
+	</ul>
+	<ul class="nav-right">
+		<% if (viewBag.user) { %>
+			<li><a href="/logout" class="text-link">logout</a></li>
+		<% } %>
+	</ul>
+</nav>

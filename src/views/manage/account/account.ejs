@@ -6,52 +6,38 @@
 
 <%- include('../../common/header.ejs') %>
 
+<%- include('../../common/manage-nav.ejs') %>
+
 <%- include('../../common/manage-menu.ejs') %>
 
 	<div class="page-manage-content">
-		<div class="item">
+		<div class="account-item username">
 			<div class="title clearfix">
 				<div class="info">
 					<h4>User Name</h4>
 					<p><%= viewBag.user.username %></p>
 				</div>
-				<div class="operation">
+				<div class="operation edit-inline">
+					<input type="text" value="<%= viewBag.user.username %>">
+					<span class="fa fa-save"></span>
 					<span class="fa fa-edit"></span>
 				</div>
 			</div>
-			<div class="content">
-				<div class="form-item clearfix">
-					<div class="textbox">
-						<input type="text" value="<%= viewBag.user.username %>">	
-					</div>
-					<div class="operation">
-						<a href="javascript:;" class="text-link"><span class="fa fa-save"></span>Save</a>
-					</div>
-				</div>
-			</div>
 		</div>
-		<div class="item">
+		<div class="account-item email">
 			<div class="title clearfix">
 				<div class="info">
 					<h4>Email</h4>
 					<p><%= viewBag.user.email %></p>
 				</div>
-				<div class="operation">
+				<div class="operation edit-inline">
+					<input type="text" value="<%= viewBag.user.email %>">
+					<span class="fa fa-save"></span>
 					<span class="fa fa-edit"></span>
 				</div>
 			</div>
-			<div class="content">
-				<div class="form-item clearfix">
-					<div class="textbox">
-						<input type="text" value="<%= viewBag.user.email %>">	
-					</div>
-					<div class="operation">
-						<a href="javascript:;" class="text-link"><span class="fa fa-save"></span>Save</a>
-					</div>
-				</div>
-			</div>
 		</div>
-		<div class="item">
+		<div class="account-item password">
 			<div class="title clearfix">
 				<div class="info">
 					<h4>Password</h4>
@@ -62,13 +48,24 @@
 				</div>
 			</div>
 			<div class="content">
-				<div class="form-item clearfix">
-					<div class="textbox">
-						<input type="text" value="<%= viewBag.user.password %>">	
-					</div>
-					<div class="operation">
-						<a href="javascript:;" class="text-link"><span class="fa fa-save"></span>Save</a>
-					</div>
+				<div class="textbox">
+					<input type="password" placeholder="Old Password">	
+				</div>
+				<div class="textbox">
+					<input type="password" placeholder="New Password">	
+				</div>
+				<div class="textbox">
+					<input type="password" placeholder="Confirm New Password">	
+				</div>
+				<div class="operation">
+					<a href="javascript:;" class="btn btn-primary">
+						<span class="icon fa fa-save"></span>
+						<span class="text">Save</span>
+					</a>
+					<a href="javascript:;" class="btn btn-default" data-action="cancel">
+						<span class="text">Cancel</span>
+					</a>
+				</div>
 				</div>
 			</div>
 		</div>
