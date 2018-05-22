@@ -1,9 +1,8 @@
-require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, ajax, prompt) {
+require(['jquery', 'layer', 'ajax', 'prompt', 'rule', 'domReady!'], function($, layer, ajax, prompt, rule) {
 	let register = {
 		init: function() {
 			this.bindEls();
 			this.bindEvent();
-			this.setRule();
 
 			this.countdown = 3;
 		},
@@ -39,26 +38,18 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 				if(e.keyCode === 13) self.submitInfo();
 			});
 		},
-		setRule: function() {
-			this.emailRule = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-			this.passwordRule = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
-			this.passwordLengthRule = /^[A-Za-z0-9!@#$%^&*? ]{6,}$/;
-			this.passwordSpecialRule = /[!@#$%^&*? ]+/;
-			this.passwordLetter = /[A-Za-z]+/;
-			this.passwordNumber = /[0-9]+/;
-		},
 		valiPasswordRule: function(val) {
 			let rules = [{
-				rule: this.passwordLengthRule,
+				rule: rule.passwordLengthRule,
 				$el: this.$character
 			}, {
-				rule: this.passwordSpecialRule,
+				rule: rule.passwordSpecialRule,
 				$el: this.$specialCharacter
 			}, {
-				rule: this.passwordLetter,
+				rule: rule.passwordLetter,
 				$el: this.$letter
 			}, {
-				rule: this.passwordNumber,
+				rule: rule.passwordNumber,
 				$el: this.$number
 			}];
 
@@ -94,7 +85,7 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'domReady!'], function($, layer, a
 				password = this.$password.val(),
 				confirmPassword = this.$confirmPassword.val();
 
-			if(!email.length || !this.emailRule.test(email)) {
+			if(!email.length || !rule.emailRule.test(email)) {
 				layer.tips('Please enter the correct email', '#email');
 				this.$email.focus();
 				return false;

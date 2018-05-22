@@ -235,3 +235,62 @@
 .page-manage-content {
 	margin-left: 300px;
 }
+
+/* page-msg */
+#page-msg {
+	position: fixed;
+	top: 50px;
+	right: 20px;
+	width: 400px;
+	z-index: 100;
+}
+#page-msg .msg {
+	margin-bottom: 10px;
+	position: relative;
+	padding: 10px;
+	border-radius: 3px;
+	background: rgba(255, 255, 255, 0.7);
+}
+#page-msg .msg p {
+	margin: 0 20px 0 0;
+	line-height: 1.3;
+	font-size: 12px;
+}
+#page-msg .msg .close {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	position: absolute;
+	top: 7px;
+	right: 5px;
+	z-index: 101;
+	font-size: 15px;
+	text-decoration: none;
+	color: #c0c4cc;
+	text-align: center;
+	line-height: 15px;
+}
+#page-msg .msg.ok {
+	background: #f0f9eb;
+}
+#page-msg .msg.ok p {
+	color: #67C23A;
+}
+#page-msg .msg.error {
+	background: #fef0f0;
+}
+#page-msg .msg.error p {
+	color: #F56C6C;
+}
+#page-msg .msg.warning {
+	background: #fdf6ec;
+}
+#page-msg .msg.warning p {
+	color: #E6A23C;
+}
+#page-msg .msg.info {
+	background: #f4f4f5;
+}
+#page-msg .msg.info {
+	color: #909399;
+}

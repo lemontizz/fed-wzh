@@ -7,6 +7,8 @@ requirejs.config({
 		layer: 'lib/layer/layer',
 		ajax: 'common/ajax',
 		loading: 'common/loading',
-		prompt: 'common/prompt'
+		prompt: 'common/prompt',
+		msg: 'common/msg',
+		rule: 'common/rule'
 	}
 });

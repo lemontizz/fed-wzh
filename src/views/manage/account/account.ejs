@@ -15,11 +15,11 @@
 			<div class="title clearfix">
 				<div class="info">
 					<h4>User Name</h4>
-					<p><%= viewBag.user.username %></p>
+					<p id="old-username"><%= viewBag.user.username %></p>
 				</div>
 				<div class="operation edit-inline">
-					<input type="text" value="<%= viewBag.user.username %>">
-					<span class="fa fa-save"></span>
+					<input id="textbox-username" type="text" max="18" value="<%= viewBag.user.username %>">
+					<span class="fa fa-save" data-action="save-username"></span>
 					<span class="fa fa-edit"></span>
 				</div>
 			</div>
@@ -28,11 +28,11 @@
 			<div class="title clearfix">
 				<div class="info">
 					<h4>Email</h4>
-					<p><%= viewBag.user.email %></p>
+					<p id="old-email"><%= viewBag.user.email %></p>
 				</div>
 				<div class="operation edit-inline">
-					<input type="text" value="<%= viewBag.user.email %>">
-					<span class="fa fa-save"></span>
+					<input id="textbox-email" type="text" value="<%= viewBag.user.email %>">
+					<span class="fa fa-save" data-action="save-email"></span>
 					<span class="fa fa-edit"></span>
 				</div>
 			</div>

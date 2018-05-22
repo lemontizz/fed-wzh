@@ -28,6 +28,12 @@ body {
 .text-link {
 	color: #7fc857;
 	text-decoration: none;
+	transition: transform 300ms;
+	display: inline-block;
+}
+
+.text-link:hover {
+	transform: scale(1.1, 1.1);
 }
 
 .disabled {
