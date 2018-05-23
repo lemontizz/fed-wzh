@@ -196,6 +196,39 @@ body {
 	transform: scale(0.8) translate(-48px , -75px);
 }
 
+.check-item {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	position: relative;
+}
+
+.check-item .check-1, .check-item .check-2 {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+}
+.check-item .check-1:before, .check-item .check-1:after, .check-item .check-2:before, .check-item .check-2:after {
+	content: '';
+    display: inline-block;
+    width: 1px;
+    background: #909399;
+    border-radius: 2px;
+}
+.check-item .check-1:before, .check-item .check-2:before {
+    height: 8px;
+    transform: rotate(-47deg) translate(2px, 2px);
+    border-radius: 2px;
+}
+.check-item .check-1:after, .check-item .check-2:after {
+	height: 13px;
+    transform: rotate(39deg) translate(6px, -5px);
+    border-radius: 2px;
+}
+.check-item .check-2:before, .check-item .check-2:after {
+	background: #7fc857;
+}
 
 
 
