@@ -57,13 +57,25 @@
 						<span class="check-1"></span>
 						<span class="check-2"></span>
 					</span>
+					<span class="rules">
+						<span id="number" class="rule">数字</span>
+						<span id="special-character" class="rule">特殊字符</span>
+						<span id="letter" class="rule">字母</span>
+						<span id="character" class="rule">6位</span>
+					</span>
 				</div>
 				<div class="textbox">
 					<input id="confirm-password" type="password" placeholder="Confirm New Password">
-					<span class="check-item"><span class="check"></span></span>
+					<span class="check-item">
+						<span class="check-1"></span>
+						<span class="check-2"></span>
+					</span>
+					<span class="rules">
+						<span class="rule" id="password-equal">与新密码一致</span>
+					</span>
 				</div>
 				<div class="operation">
-					<a href="javascript:;" class="btn btn-primary">
+					<a href="javascript:;" class="btn btn-primary" data-action="save-password">
 						<span class="icon fa fa-save"></span>
 						<span class="text">Save</span>
 					</a>

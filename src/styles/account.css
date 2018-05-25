@@ -151,3 +151,43 @@ body {
 .page-manage-content .password .content .operation {
 	margin-top: 10px;
 }
+.page-manage-content .password .content .rules {
+	font-size: 0px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.page-manage-content .password .content .rules .rule {
+	font-size: 12px;
+	margin-left: 3px;
+	position: relative;
+	height: 12px;
+    display: inline-block;
+}
+.page-manage-content .password .content .rules .rule:after {
+	position: absolute;
+    left: 0;
+    display: inline-block;
+    overflow: hidden;
+    height: 0;
+    color: #7fc857;
+    top: 0px;
+    transition: height 400ms;
+}
+.page-manage-content .password .content .rules .rule.active:after {
+	height: 12px;
+}
+.page-manage-content #number:after{
+	content: '数字';
+}
+.page-manage-content #special-character:after{
+	content: '特殊字符';
+}
+.page-manage-content #letter:after{
+	content: '字母';
+}
+.page-manage-content #character:after{
+	content: '6位';
+}
+.page-manage-content #password-equal:after {
+	content: '与新密码一致';
+}

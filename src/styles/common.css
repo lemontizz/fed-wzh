@@ -201,6 +201,7 @@ body {
 	width: 16px;
 	height: 16px;
 	position: relative;
+	vertical-align: middle;
 }
 
 .check-item .check-1, .check-item .check-2 {
@@ -218,7 +219,7 @@ body {
 }
 .check-item .check-1:before, .check-item .check-2:before {
     height: 8px;
-    transform: rotate(-47deg) translate(2px, 2px);
+    transform: rotate(-47deg) translate(2px, 1px);
     border-radius: 2px;
 }
 .check-item .check-1:after, .check-item .check-2:after {
@@ -228,8 +229,12 @@ body {
 }
 .check-item .check-2:before, .check-item .check-2:after {
 	background: #7fc857;
+	opacity: 0;
+	transition: opacity 200ms;
 }
-
+.check-item.active .check-2:before, .check-item.active .check-2:after {
+	opacity: 1;
+}
 
 
 

@@ -17,7 +17,7 @@ require(['jquery', 'layer', 'ajax', 'prompt', 'rule', 'domReady!'], function($, 
 			this.$number = $('#number');
 			this.$letter = $('#letter');
 			this.$specialCharacter = $('#special-character');
-			this.$passwordEqual = $('#passwordEqual');
+			this.$passwordEqual = $('#password-equal');
 		},
 		bindEvent: function() {
 			let self = this;
