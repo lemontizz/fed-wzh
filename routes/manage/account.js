@@ -66,12 +66,6 @@ module.exports = [{
 
 		if(!user.success) return;
 
-		console.log(user);
-
-		console.log('==========')
-
-		console.log(params);
-
 		if(user.data.password !== params.oldPassword) {
 			res.status(400).json({
 				success: false,

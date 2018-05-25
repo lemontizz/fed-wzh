@@ -1,0 +1,94 @@
+#page-manage-menu {
+	background: #fff;
+}
+.user-manage {
+	margin-left: 240px;
+	width: 1000px;
+}
+.user-manage .list {
+	margin: 0;
+	padding: 0;
+}
+.user-manage .list ul {
+	margin: 0;
+	padding: 0;
+}
+.user-manage .list li {
+	list-style: none;
+	width: 50%;
+	float: left;
+	padding-bottom: 25px;
+}
+.user-manage .list .item-container {
+	margin: 0 auto;
+	background: #fff;
+	height: 100px;
+	box-shadow: 0 2px 10px 1px rgba(0,0,0,.1);
+	position: relative;
+	overflow: hidden;
+	margin-left: 25px;	
+}
+.user-manage .list .item-container .avatar {
+	float: left;
+	width: 25%;
+	background: rgb(245, 246, 247);
+	height: 100%;
+}
+.user-manage .list .item-container .info {
+	float: left;
+	height: 100%;
+	width: 75%;
+}
+.user-manage .list .item-container .info div:first-child {
+	padding: 10px 10px 0 10px;
+}
+.user-manage .list .item-container .info h4 {
+	margin: 0;
+	line-height: 1.5;
+	font-size: 16px;
+}
+.user-manage .list .item-container .info p {
+	margin: 0;
+	line-height: 2;
+	font-size: 14px;
+}
+.user-manage .list .item-container .info small {
+	font-size: 12px;
+}
+.user-manage .list .item-container .operation {
+	position: absolute;
+	right: 5px;
+	bottom: -20px;
+	transition: bottom 300ms;
+}
+.user-manage .list .item-container:hover .operation {
+	bottom: 5px;
+}
+.user-manage .list .item-container .operation span a {
+	text-decoration: none;
+	color: #424242;
+	font-size: 12px;
+	transition: color 300ms;
+}
+.user-manage .list .item-container .operation span a:hover {
+	color: #7fc857;
+}
+.user-manage .operation-wrap {
+	margin-top: 20px;
+	padding: 20px 0;
+}
+.user-manage .operation-wrap .search {
+	float: right;
+}
+.user-manage .operation-wrap .search input {
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #7fc857;
+	padding: 5px;
+	background: none;
+	outline: none;
+}
+.user-manage .operation-wrap .search .btn-search {
+	color: #7fc857;
+}
