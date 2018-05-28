@@ -41,7 +41,6 @@ app.use(function(req, res, next) {
 
 app.use('/', indexRouter);
 
-
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

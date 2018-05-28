@@ -53,41 +53,43 @@ module.exports = function({
 			return;
 		}
 
-		// 连接数据库
-		mongoose.connect(dbUrl, function(err) {
-			if(err) {
-				console.log('connection failed')
-				if(connectionError && typeof connectionError === 'function') {
-					connectionError(err);
-				} else {
-					res.status(500).json({
-						success: false,
-						message: '连接数据库出错',
-						data: null
-					});
-				}
-				reject(err);
-				return;
-			} 
+		// // 连接数据库
+		// mongoose.connect(dbUrl, function(err) {
+		// 	if(err) {
+		// 		console.log('connection failed')
+		// 		if(connectionError && typeof connectionError === 'function') {
+		// 			connectionError(err);
+		// 		} else {
+		// 			res.status(500).json({
+		// 				success: false,
+		// 				message: '连接数据库出错',
+		// 				data: null
+		// 			});
+		// 		}
+		// 		reject(err);
+		// 		return;
+		// 	} 
 
-			console.log('connection success')
+		// 	console.log('connection success')
 
-			if(connectionSuccess && typeof connectionSuccess === 'function') {
-				connectionSuccess();
-				resolve();
-				return;
-			}
+		// 	if(connectionSuccess && typeof connectionSuccess === 'function') {
+		// 		connectionSuccess();
+		// 		resolve();
+		// 		return;
+		// 	}
 
 			model[method](...options, function(operationErr, result) {
-					if(err) {
+					if(operationErr) {
 						console.log('operation failed');
-						if(error && typeof error === 'function') error(operationErr);
-
-						res.status(500).json({
-							success: false,
-							message: '数据库操作失败',
-							data: null
-						});
+						if(error && typeof error === 'function') {
+							error(operationErr);
+						} else {
+							res.status(500).json({
+								success: false,
+								message: '数据库操作失败',
+								data: null
+							});
+						}
 						reject(err);
 						return;
 					}
@@ -145,6 +147,6 @@ module.exports = function({
 						data: result
 					});
 				})
-		})
+		// })
 	});
 }

@@ -9,6 +9,7 @@ requirejs.config({
 		loading: 'common/loading',
 		prompt: 'common/prompt',
 		msg: 'common/msg',
-		rule: 'common/rule'
+		rule: 'common/rule',
+		mustache: 'lib/mustache'
 	}
 });

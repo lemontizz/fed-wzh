@@ -19,34 +19,37 @@
 			</div>
 		</div>
 		<div class="list">
-			<ul class="clearfix">
-				<% (viewBag.userList).forEach(function(user) { %>
-					<li>
-						<div class="item-container clearfix">
-							<div class="avatar">
-								<img src="" alt="">
-							</div>
-							<div class="info">
-								<div>
-									<h4><%= user.username %></h4>
-									<p><%= user.email %></p>
-									<small>已启用</small>
-								</div>
-							</div>
-							<div class="operation">
-								<span>
-									<a href="javascript:;">禁用</a>
-								</span>
-								<span>
-									<a href="javascript:;">删除</a>	
-								</span>
-							</div>
-						</div>
-					</li>
-				<% }) %>
+			<ul class="clearfix" id="user-list-wrap">
 			</ul>
 		</div>
 	</div>
+
+	<script type="x-tmpl-mustache" id="user-list-template">
+		{{#records}}
+			<li>
+				<div class="item-container clearfix">
+					<div class="avatar">
+						<img src="" alt="">
+					</div>
+					<div class="info">
+						<div>
+							<h4>{{username}}</h4>
+							<p>{{email}}</p>
+							<small>已启用</small>
+						</div>
+					</div>
+					<div class="operation">
+						<span>
+							<a href="javascript:;">禁用</a>
+						</span>
+						<span>
+							<a href="javascript:;">删除</a>	
+						</span>
+					</div>
+				</div>
+			</li>
+		{{/records}}
+	</script>
 
 <%
     viewBag.scriptsFiles = ['pages/manage/user/user'];

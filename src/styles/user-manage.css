@@ -29,14 +29,15 @@
 	margin-left: 25px;	
 }
 .user-manage .list .item-container .avatar {
-	float: left;
-	width: 25%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 110px;
 	background: rgb(245, 246, 247);
 	height: 100%;
 }
 .user-manage .list .item-container .info {
-	float: left;
-	height: 100%;
+	margin-left: 110px;
 	width: 75%;
 }
 .user-manage .list .item-container .info div:first-child {
