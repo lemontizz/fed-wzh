@@ -14,17 +14,17 @@
 		<div class="clearfix operation-wrap">
 			<div class="operation"></div>
 			<div class="search">
-				<input type="text">
-				<span class="btn-search"><span class="fa fa-search"></span></span>
+				<input type="text" id="textbox-search">
+				<span class="btn-search" id="btn-search"><span class="fa fa-search"></span></span>
 			</div>
 		</div>
 		<div class="list">
-			<ul class="clearfix" id="user-list-wrap">
+			<ul class="clearfix" id="grid-wrap">
 			</ul>
 		</div>
 	</div>
 
-	<script type="x-tmpl-mustache" id="user-list-template">
+	<script type="x-tmpl-mustache" id="grid-template">
 		{{#records}}
 			<li>
 				<div class="item-container clearfix">

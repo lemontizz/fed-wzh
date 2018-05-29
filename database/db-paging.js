@@ -25,7 +25,7 @@ module.exports = function({
 	error = null
 }) {
 
-	console.log('dfjiwkehrkwehjfjdsfjdshfjsdkh')
+	console.log('werjkdfjdskjfksdjfksjfksjdfksjfk111111111')
 
 	let start = pageIndex * pageSize - pageSize;
 	params.unshift(query);
@@ -33,6 +33,8 @@ module.exports = function({
 		skip: start,
 		limit: Number(pageSize)
 	});
+
+	console.log('jfksjfksdjfksdjfksdjfk22222222222')
 
 	async.parallel({
 		count: function(done) {
@@ -42,6 +44,11 @@ module.exports = function({
 			})
 		},
 		records: function(done) {
+
+			console.log('988888888888')
+			console.log(...params);
+
+			console.log('werewrewrewrwerwerwer9238948329584385948')
 			model.find(...params, function(err, doc) {
 				console.log(doc);
 				done(err, doc);

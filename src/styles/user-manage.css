@@ -92,4 +92,5 @@
 }
 .user-manage .operation-wrap .search .btn-search {
 	color: #7fc857;
+	cursor: default;
 }

@@ -10,6 +10,7 @@ requirejs.config({
 		prompt: 'common/prompt',
 		msg: 'common/msg',
 		rule: 'common/rule',
-		mustache: 'lib/mustache'
+		mustache: 'lib/mustache',
+		grid: 'common/grid'
 	}
 });

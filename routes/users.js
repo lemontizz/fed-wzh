@@ -12,10 +12,16 @@ module.exports = [{
 	method: 'get',
 	api: '/user-list',
 	callback: function(req, res, next) {
+		let fileds = req.query.fields.split(','),
+			search = req.query.search,
+			query = [];
+
+		if(search) fileds.map((i) => query.push({[i.trim()]: {$regex : ".*" + search + ".*", $options: "i"}}));
+
 		paging({
 			req,
 			res,
-			query: req.query.search || {},
+			query: query.length ? {$or: query} : {},
 			params: [{password: 0}],
 			model: mod.Model,
 			pageIndex: req.query.pageIndex,
