@@ -1,11 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var users = require('./users');
 var login = require('./login');
 var register = require('./register');
 var home = require('./home');
 var account = require('./manage/account');
-var allRouters = [...users, ...login, ...register, ...home, ...account];
+var users = require('./manage/users');
+var myProject = require('./manage/my-project');
+var projectManage = require('./manage/project-manage');
+var allRouters = [...users, ...login, ...register, ...home, ...account, ...myProject, ...projectManage];
 
 router.get('/', function(req, res, next) {
   	res.render('home/home');

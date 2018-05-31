@@ -1,0 +1,17 @@
+<%
+    viewBag.pageTitle = 'FED - 上传项目';
+    viewBag.cssFiles = ['upload-project'];
+    viewBag.menu = 'upload-project';
+%>
+
+<%- include('../../common/header.ejs') %>
+
+<%- include('../../common/manage-nav.ejs') %>
+
+<%- include('../../common/manage-menu.ejs') %>
+
+<%
+    viewBag.scriptsFiles = ['pages/manage/my-project/upload-project'];
+%>
+
+<%- include('../../common/footer.ejs') %>

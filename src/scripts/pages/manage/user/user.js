@@ -41,7 +41,6 @@ require(['jquery', 'ajax', 'grid', 'prompt', 'msg', 'domReady!'], function($, aj
 				message: '是否确认删除' + data.username + '?',
 				callbacks: {
 					confirmAfter: function() {
-						console.log('skfjksdjfksjdfkjdsk')
 						self.del(data)
 					}
 				}

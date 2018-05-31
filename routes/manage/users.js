@@ -1,6 +1,6 @@
-var operationDB = require('../database/operation-db');
-var paging = require('../database/db-paging');
-var mod = require('../model/user');
+var operationDB = require('../../database/operation-db');
+var paging = require('../../database/db-paging');
+var mod = require('../../model/user');
 
 module.exports = [{
 	method: 'get',
@@ -43,8 +43,6 @@ module.exports = [{
 			model: mod.Model
 		});
 
-		console.log(delUser);
-
 		if(delUser.success) {
 			res.json({
 				success: true,
@@ -67,8 +65,6 @@ module.exports = [{
 			model: mod.Model
 		});
 
-		console.log(user);
-
 		if(user.success) {
 			res.json({
 				success: true,
@@ -90,8 +86,6 @@ module.exports = [{
 			options: [{_id: id}, {status: 1, updateAt: new Date()}, {password: 0}],
 			model: mod.Model
 		});
-
-		console.log(user);
 
 		if(user.success) {
 			res.json({

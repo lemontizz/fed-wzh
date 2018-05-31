@@ -12,12 +12,12 @@
 				<a href="/account">My account</a>
 			</li>
 		<% if(viewBag.user.role === 'user') { %>
-			<% if(viewBag.menu === 'project') { %>
+			<% if(viewBag.menu === 'my-project') { %>
 				<li class="active">
 			<% } else { %>
 				<li>
 			<% } %>
-					<a href="/project">My project</a>
+					<a href="/my-project">My project</a>
 				</li>
 			<% if(viewBag.menu === 'upload-project') { %>
 				<li class="active">
