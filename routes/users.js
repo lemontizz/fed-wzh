@@ -23,6 +23,7 @@ module.exports = [{
 			res,
 			query: query.length ? {$or: query} : {},
 			params: [{password: 0}],
+			query: {username: {$ne: 'admin'}},
 			model: mod.Model,
 			pageIndex: req.query.pageIndex,
 			pageSize: req.query.pageSize
@@ -33,9 +34,6 @@ module.exports = [{
 	api: '/user/:id',
 	callback: async function(req, res, next) {
 		let id = req.params.id;
-
-		console.log('====')
-		console.log(id);
 
 		let delUser = await operationDB({
 			req,
@@ -51,6 +49,54 @@ module.exports = [{
 			res.json({
 				success: true,
 				data: delUser.data,
+				message: null
+			})
+		}
+	}
+}, {
+	method: 'put',
+	api: '/user/disable/:id',
+	callback: async function(req, res, next) {
+		let id = req.params.id;
+
+		let user = await operationDB({
+			req,
+			res,
+			method: 'findOneAndUpdate',
+			options: [{_id: id}, {status: 0, updateAt: new Date()}, {password: 0}],
+			model: mod.Model
+		});
+
+		console.log(user);
+
+		if(user.success) {
+			res.json({
+				success: true,
+				data: user.data,
+				message: null
+			})
+		}
+	}
+}, {
+	method: 'put',
+	api: '/user/enable/:id',
+	callback: async function(req, res, next) {
+		let id = req.params.id;
+
+		let user = await operationDB({
+			req,
+			res,
+			method: 'findOneAndUpdate',
+			options: [{_id: id}, {status: 1, updateAt: new Date()}, {password: 0}],
+			model: mod.Model
+		});
+
+		console.log(user);
+
+		if(user.success) {
+			res.json({
+				success: true,
+				data: user.data,
 				message: null
 			})
 		}

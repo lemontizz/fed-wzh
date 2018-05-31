@@ -11,9 +11,24 @@ require(['jquery', 'ajax', 'grid', 'prompt', 'msg', 'domReady!'], function($, aj
 			this.Grid = new Grid({
 				url: '/user-list',
 				searchFields: 'username,email',
+				onRenderBefore: function(root) {
+					root.data.map(function(i) {
+						i.statusName = i.status == '0' ? '已禁用' : '已启用';
+						i.roleName = i.role == 'user' ? '用户' : '管理员';
+					});
+				},
 				onClickedGirdItem: function(action, data) {
 					if(action === 'del') {
 						self.confirmDel(data);
+						return;
+					}
+					if(action === 'disable') {
+						self.disableUser(data);
+						return;
+					}
+					if(action === 'enable') {
+						self.enableUser(data);
+						return;
 					}
 				}
 			});
@@ -46,7 +61,37 @@ require(['jquery', 'ajax', 'grid', 'prompt', 'msg', 'domReady!'], function($, aj
 				});
 				self.Grid.getData();
 			})
-		}
+		},
+		disableUser: function(data) {
+			let self = this;
+
+			ajax({
+				url: '/user/disable/' + data._id,
+				method: 'put',
+			})
+			.done(function() {
+				msg({
+					type: 'ok',
+					text: '用户' + data.username +'禁用成功'
+				});
+				self.Grid.getData();
+			})
+		},
+		enableUser: function(data) {
+			let self = this;
+
+			ajax({
+				url: '/user/enable/' + data._id,
+				method: 'put',
+			})
+			.done(function() {
+				msg({
+					type: 'ok',
+					text: '用户' + data.username +'启用成功'
+				});
+				self.Grid.getData();
+			})
+		},
 	};
 
 	user.init();

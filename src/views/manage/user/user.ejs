@@ -44,13 +44,17 @@
 						<div>
 							<h4>{{username}}</h4>
 							<p>{{email}}</p>
-							<small>已启用</small>
+							<small>{{roleName}}</small> - <small>{{statusName}}</small>
 						</div>
 					</div>
 					<div class="operation">
 						<span>
-							<a href="javascript:;" data-action="enable">启用</a>
-							<a href="javascript:;" data-action="diable">禁用</a>
+							{{^status}}
+							<a href="javascript:;" data-id="{{_id}}" data-action="enable">启用</a>
+							{{/status}}
+							{{#status}}
+							<a href="javascript:;" data-id="{{_id}}" data-action="disable">禁用</a>
+							{{/status}}
 						</span>
 						<span>
 							<a href="javascript:;" data-id="{{_id}}" data-action="del">删除</a>	
@@ -59,19 +63,6 @@
 				</div>
 			</li>
 		{{/records}}
-	</script>
-
-
-	<script type="x-tmpl-mustache" id="paging-template">
-		{{#paging}}
-		<ul>
-			<li class="records"><span data-field="current">1</span>/<span data-field="records">10</span></li>
-			<li class="page first" data-field="first"><i class="fa fa-angle-double-left"></i></li>
-			<li class="page prev" data-field="prev"><i class="fa fa-angle-left"></i></li>
-			<li class="page next" data-field="next"><i class="fa fa-angle-right"></i></li>
-			<li class="page last" data-field="last"><i class="fa fa-angle-double-right"></i></li>
-		</ul>
-		{{/paging}}
 	</script>
 
 <%

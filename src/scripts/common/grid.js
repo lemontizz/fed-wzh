@@ -15,6 +15,7 @@ define(function(require, exports, module) {
 		pagingTemplateId: 'paging-template',
 		pageSize: 10,
 		pageIndex: 1,
+		onRenderBefore: null,
 		onClickedGirdItem: null
 	};
 
@@ -30,12 +31,12 @@ define(function(require, exports, module) {
 		this.pagingWrapId = opts.pagingWrapId;
 		this.pageSize = opts.pageSize;
 		this.pageIndex = opts.pageIndex;
+		this.onRenderBefore = opts.onRenderBefore;
 		this.onClickedGirdItem = opts.onClickedGirdItem;
 	};
 
 	Grid.prototype = {
 		init: function() {
-
 			this.bindEls();
 			this.bindInfo();
 			this.bindEvent();
@@ -92,6 +93,10 @@ define(function(require, exports, module) {
 				}
 			})
 			.done(function(result) {
+				if(typeof self.onRenderBefore === 'function') {
+					self.onRenderBefore.call(self, result);
+				}
+				console.log(result);
 				self.gridData = result.data || [];
 				self.buildList(result);
 			});

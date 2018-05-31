@@ -11,34 +11,38 @@
 		<% } %>
 				<a href="/account">My account</a>
 			</li>
-		<% if(viewBag.menu === 'project') { %>
-			<li class="active">
-		<% } else { %>
-			<li>
+		<% if(viewBag.user.role === 'user') { %>
+			<% if(viewBag.menu === 'project') { %>
+				<li class="active">
+			<% } else { %>
+				<li>
+			<% } %>
+					<a href="/project">My project</a>
+				</li>
+			<% if(viewBag.menu === 'upload-project') { %>
+				<li class="active">
+			<% } else { %>
+				<li>
+			<% } %>
+					<a href="/upload-project">Upload project</a>
+				</li>
 		<% } %>
-				<a href="/project">My project</a>
-			</li>
-		<% if(viewBag.menu === 'upload-project') { %>
-			<li class="active">
-		<% } else { %>
-			<li>
+		<% if(viewBag.user.role === 'admin') { %>
+			<% if(viewBag.menu === 'user-manage') { %>
+				<li class="active">
+			<% } else { %>
+				<li>
+			<% } %>
+					<a href="/user-manage">User management</a>
+				</li>
+			<% if(viewBag.menu === 'project-manage') { %>
+				<li class="active">
+			<% } else { %>
+				<li>
+			<% } %>
+					<a href="/project-manage">Project management</a>
+				</li>
 		<% } %>
-				<a href="/upload-project">Upload project</a>
-			</li>
-		<% if(viewBag.menu === 'user-manage') { %>
-			<li class="active">
-		<% } else { %>
-			<li>
-		<% } %>
-				<a href="/user-manage">User management</a>
-			</li>
-		<% if(viewBag.menu === 'project-manage') { %>
-			<li class="active">
-		<% } else { %>
-			<li>
-		<% } %>
-				<a href="/project-manage">Project management</a>
-			</li>
 	</ul>
 
 </menu>

@@ -22,7 +22,8 @@ var register = {
 			username: req.body.username,
 			password: req.body.password,
 			email: req.body.email,
-			role: 'user'
+			role: req.body.username === 'admin' ? 'admin' : 'user',
+			status: 1
 		});
 
 		let usernameRepeat = await operationDB({

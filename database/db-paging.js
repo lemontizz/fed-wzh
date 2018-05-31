@@ -34,8 +34,6 @@ module.exports = function({
 		limit: Number(pageSize)
 	});
 
-	console.log('jfksjfksdjfksdjfksdjfk22222222222')
-
 	async.parallel({
 		count: function(done) {
 			model.count(query).exec(function(err, count) {
@@ -44,19 +42,14 @@ module.exports = function({
 			})
 		},
 		records: function(done) {
-
-			console.log('988888888888')
+			console.log(']]]]]]');
 			console.log(...params);
-
-			console.log('werewrewrewrwerwerwer9238948329584385948')
 			model.find(...params, function(err, doc) {
 				console.log(doc);
 				done(err, doc);
 			});
 		}
 	}, function(err, result) {
-		console.log('=======');
-
 		if(err) {
 			if(typeof error === 'function') {
 				error(err, result);
@@ -69,7 +62,12 @@ module.exports = function({
 			}
 		} else {
 			if(typeof success === 'function') {
-				success(result);
+				success({
+					success: true,
+					message: '',
+					data: result.records || [],
+					count: result.count || 0
+				});
 			} else {
 				res.json({
 					success: true,
