@@ -28,4 +28,31 @@ module.exports = [{
 			pageSize: req.query.pageSize
 		});
 	}
+}, {
+	method: 'delete',
+	api: '/user/:id',
+	callback: async function(req, res, next) {
+		let id = req.params.id;
+
+		console.log('====')
+		console.log(id);
+
+		let delUser = await operationDB({
+			req,
+			res,
+			method: 'findOneAndRemove',
+			options: [{_id: id}, {password: 0}],
+			model: mod.Model
+		});
+
+		console.log(delUser);
+
+		if(delUser.success) {
+			res.json({
+				success: true,
+				data: delUser.data,
+				message: null
+			})
+		}
+	}
 }]

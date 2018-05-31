@@ -236,8 +236,36 @@ body {
 	opacity: 1;
 }
 
-
-
+.paging {
+	padding: 10px 0;
+}
+.paging ul {
+	margin: 0;
+	padding: 0;
+	text-align: right;
+}
+.paging ul li {
+	list-style: none;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 14px;
+	padding: 0 5px;
+}
+.paging .page {
+	font-size: 16px;
+	cursor: pointer;
+	transition: 200ms color;
+}
+.paging .page:hover {
+	color: #7fc857;
+}
+.paging .disabled {
+	color: #ccc !important;
+}
+.paging span[data-field=current] {
+	color: #7fc857;
+	font-weight: 400;
+}
 
 
 

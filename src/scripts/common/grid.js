@@ -10,10 +10,12 @@ define(function(require, exports, module) {
 		gridTemplateId: 'grid-template',
 		textboxSearch: 'textbox-search',
 		btnSearchId: 'btn-search',
-		searchFields: 'username',
+		searchFields: '',
 		pagingWrapId: 'paging-wrap',
+		pagingTemplateId: 'paging-template',
 		pageSize: 10,
-		pageIndex: 1
+		pageIndex: 1,
+		onClickedGirdItem: null
 	};
 
 	let Grid = function(options) {
@@ -28,20 +30,27 @@ define(function(require, exports, module) {
 		this.pagingWrapId = opts.pagingWrapId;
 		this.pageSize = opts.pageSize;
 		this.pageIndex = opts.pageIndex;
+		this.onClickedGirdItem = opts.onClickedGirdItem;
 	};
 
 	Grid.prototype = {
 		init: function() {
+
 			this.bindEls();
+			this.bindInfo();
 			this.bindEvent();
 			this.getData();
 		},
 		bindEls: function() {
 			this.$grid = $('#' + this.gridWrapId);
-			this.$template = $('#' + this.gridTemplateId);
+			this.$gridTemplate = $('#' + this.gridTemplateId);
 			this.$btnSearch = $('#' + this.btnSearchId);
 			this.$tbSearch = $('#' + this.textboxSearch);
 			this.$paging = $('#' + this.pagingWrapId);
+			this.$pagingTemplate = $('#' + this.pagingTemplate);
+		},
+		bindInfo: function() {
+			this.gridData = [];
 		},
 		bindEvent: function() {
 			let self = this;
@@ -56,7 +65,19 @@ define(function(require, exports, module) {
 					self.pageIndex = 1;
 					self.getData();
 				}
-			})
+			});
+
+			this.$grid.on('click', '[data-action]', function() {
+				let action = $(this).data('action'),
+					id = $(this).data('id');
+				self.clickedGirdItem(action, id)
+			});
+
+			this.$paging.on('click', '[data-action]', function() {
+				if($(this).hasClass('disabled')) return;
+				let action = $(this).data('action');
+				self.gotoPage(action);
+			});
 		},
 		getData: function() {
 			let self = this;
@@ -71,13 +92,70 @@ define(function(require, exports, module) {
 				}
 			})
 			.done(function(result) {
+				self.gridData = result.data || [];
 				self.buildList(result);
 			});
 		},
 		buildList: function(result) {
-			let output = Mustache.render(this.$template.html(), {records: result.data});
+			let output = Mustache.render(this.$gridTemplate.html(), {records: result.data || []});
 
 			this.$grid.html(output);
+			this.buildPaging(result.count || 0);
+		},
+		buildPaging: function(count) {
+			let page = Math.ceil(count / this.pageSize),
+				current = this.pageIndex;
+
+			this.$paging.find('[data-field=current]').text(current);
+			this.$paging.find('[data-field=records]').text(page);
+			this.$paging.find('[data-field=total]').text(count);
+			this.setDisableOperation(current, page, count);
+		},
+		setDisableOperation: function(current, page, count) {
+			let pageSize = this.pageSize;
+
+			this.$paging.find('.page').removeClass('disabled');
+
+			if(count <= pageSize) {
+				this.$paging.find('.page').addClass('disabled');
+				return;
+			}
+			if(current == 1) {
+				this.$paging.find('[data-action=first]').addClass('disabled');
+				this.$paging.find('[data-action=prev]').addClass('disabled');
+				return;
+			}
+			if(current == page) {
+				this.$paging.find('[data-action=last]').addClass('disabled');
+				this.$paging.find('[data-action=next]').addClass('disabled');
+			}
+		},
+		gotoPage: function(action) {
+			switch(action) {
+				case 'first':
+					this.pageIndex = 1;
+					break;
+				case 'prev':
+					this.pageIndex--;
+					break;
+				case 'next':
+					this.pageIndex++;
+					break;
+				case 'last':
+					this.pageIndex = this.$paging.find('[data-field=records]').text();
+					break;
+				default:
+					break;
+			}
+
+			this.getData();
+		},
+		clickedGirdItem: function(action, id) {
+			let data = this.gridData.find((i) => i._id == id) || null;
+
+			if(typeof this.onClickedGirdItem === 'function') {
+				this.onClickedGirdItem.apply(this, [action, data])
+			}
 		}
 	}
 
