@@ -10,8 +10,9 @@ module.exports = [{
 	}
 }, {
 	method: 'get',
-	api: '/user-list',
+	api: '/api/user-list',
 	callback: function(req, res, next) {
+		console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhere');
 		let fileds = req.query.fields.split(','),
 			search = req.query.search,
 			query = [];

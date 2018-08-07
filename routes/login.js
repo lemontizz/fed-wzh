@@ -17,6 +17,7 @@ module.exports = [{
 
 let login = {
 	login: async function(req, res, next) {
+		console.log('lllllllllllllllllogin');
 		let query = {username: req.body.username, password: req.body.password};
 
 		let users = await operationDB({

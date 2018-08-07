@@ -9,7 +9,7 @@ require(['jquery', 'ajax', 'grid', 'prompt', 'msg', 'domReady!'], function($, aj
 			let self = this;
 
 			this.Grid = new Grid({
-				url: '/user-list',
+				url: '/api/user-list',
 				searchFields: 'username,email',
 				onRenderBefore: function(root) {
 					root.data.map(function(i) {
